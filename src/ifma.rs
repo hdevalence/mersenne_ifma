@@ -1,11 +1,20 @@
-use packed_simd::{u64x4, IntoBits};
+use packed_simd::u64x4;
 
 #[allow(improper_ctypes)]
 extern "C" {
     #[link_name = "llvm.x86.avx512.vpmadd52l.uq.256"]
-    fn madd52lo(z: u64x4, x: u64x4, y: u64x4) -> u64x4;
+    fn madd52lo_intrin(z: u64x4, x: u64x4, y: u64x4) -> u64x4;
     #[link_name = "llvm.x86.avx512.vpmadd52h.uq.256"]
-    fn madd52hi(z: u64x4, x: u64x4, y: u64x4) -> u64x4;
+    fn madd52hi_intrin(z: u64x4, x: u64x4, y: u64x4) -> u64x4;
+}
+
+#[inline]
+pub fn madd52lo(z: u64x4, x: u64x4, y: u64x4) -> u64x4 {
+    madd52lo_intrin(z, x, y)
+}
+#[inline]
+pub fn madd52hi(z: u64x4, x: u64x4, y: u64x4) -> u64x4 {
+    madd52hi_intrin(z, x, y)
 }
 
 #[cfg(test)]
