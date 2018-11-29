@@ -1,0 +1,9 @@
+[package]
+name = "mersenne_ifma"
+version = "0.1.0"
+authors = ["Henry de Valence <hdevalence@hdevalence.ca>"]
+edition = "2018"
+
+[dependencies]
+packed_simd = "0.3.1"
+tsc-timer = "0.1.5"
