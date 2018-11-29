@@ -3,7 +3,8 @@
 
 #![feature(simd_ffi, link_llvm_intrinsics)]
 #![deny(missing_docs)]
-#![cfg(not(target_feature = "avx512ifma"))]
+
+#[cfg(not(target_feature = "avx512ifma"))]
 compile_error!("This crate requires AVX512-IFMA");
 
 // The `packed_simd` crate contains what would have been the Rust SIMD
