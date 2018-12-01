@@ -126,7 +126,7 @@ mod tests {
             61331686004747624160469066397670963925u128,
         );
 
-        let x_vec: F127 = xs.into();
+        let x_vec: F127x4 = xs.into();
 
         assert_eq!(xs, x_vec.into());
     }
