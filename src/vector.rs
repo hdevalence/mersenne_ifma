@@ -117,6 +117,7 @@ impl Mul<F127x4> for F127x4 {
 mod tests {
     use super::*;
 
+    #[allow(non_snake_case)]
     #[test]
     fn from_into_F127_round_trips() {
         let xs = (
