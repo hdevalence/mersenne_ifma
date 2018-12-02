@@ -1,7 +1,7 @@
 //! An IFMA-based implementation of field operations over the Mersenne
 //! prime `2**127 -1`.
 
-#![no_std]
+//#![no_std]
 #![feature(simd_ffi, link_llvm_intrinsics)]
 #![deny(missing_docs)]
 
