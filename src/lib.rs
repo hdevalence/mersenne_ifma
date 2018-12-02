@@ -14,8 +14,8 @@
 // operations, so we use it instead of core::arch.
 extern crate packed_simd;
 
-mod serial;
 #[cfg(target_feature = "avx512ifma")]
 mod ifma;
+pub mod serial;
 #[cfg(target_feature = "avx512ifma")]
 mod vector;

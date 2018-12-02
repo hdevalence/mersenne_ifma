@@ -1,10 +1,4 @@
-//! Serial arithmetic.
-//!
-//! This code implements prime-field and extension-field arithmetic
-//! using `u128`s. Speed is not the highest priority, because the idea
-//! is that the bulk of the work will be done using the vectorized
-//! implementation.
-//!
+//! A serial implementation of the Mersenne field.
 
 use core::ops::{Add, AddAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 
@@ -16,7 +10,8 @@ const P: u128 = (1 << 127) - 1;
 /// # Invariant
 ///
 /// The inner `u128` always lies in the range \\([0, 2^{127} - 1]\\).
-#[derive(Copy, Clone)]
+// XXX eq impl isn't correct (not always reduced)
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct F127(u128);
 
 impl From<u128> for F127 {
