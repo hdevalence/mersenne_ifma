@@ -33,6 +33,8 @@ use packed_simd::u64x4;
 
 use crate::ifma::{madd52hi, madd52lo};
 
+use crate::serial::F127;
+
 pub struct F127x4(u64x4, u64x4, u64x4);
 
 impl From<(F127, F127, F127, F127)> for F127x4 {
