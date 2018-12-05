@@ -175,4 +175,25 @@ mod tests {
         assert_eq!(xs, x_vec.into());
     }
 
+    #[test]
+    fn mul_matches_serial() {
+        let xs: (F127, F127, F127, F127) = (
+            101054725971136791246222244709531340474u128.into(),
+            38188712660835962328561942614081743514u128.into(),
+            43654918112560223727172090912658261884u128.into(),
+            61331686004747624160469066397670963925u128.into(),
+        );
+
+        let x_vec: F127x4 = xs.into();
+
+        let z_vec = x_vec * x_vec;
+
+        let zs: (F127, F127, F127, F127) = z_vec.into();
+
+        assert_eq!(zs.0, xs.0 * xs.0);
+        assert_eq!(zs.1, xs.1 * xs.1);
+        assert_eq!(zs.2, xs.2 * xs.2);
+        assert_eq!(zs.3, xs.3 * xs.3);
+    }
+
 }
