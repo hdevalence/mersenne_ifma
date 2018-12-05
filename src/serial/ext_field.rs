@@ -46,7 +46,7 @@ impl Mul<F127Ext> for F127Ext {
         let ac = a * c;
         let bd = b * d;
 
-        F127Ext(ac - bd, (b-a)*(c-d) + ac + bd)
+        F127Ext(ac - bd, (b - a) * (c - d) + ac + bd)
     }
 }
 

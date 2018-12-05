@@ -6,4 +6,5 @@
 mod ext_field;
 mod prime_field;
 
+pub use self::ext_field::F127Ext;
 pub use self::prime_field::F127;
