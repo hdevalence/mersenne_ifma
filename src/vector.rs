@@ -64,8 +64,8 @@ impl From<(F127, F127, F127, F127)> for F127x4 {
     }
 }
 
-impl Into<(u128, u128, u128, u128)> for F127x4 {
-    fn into(self) -> (u128, u128, u128, u128) {
+impl Into<(F127, F127, F127, F127)> for F127x4 {
+    fn into(self) -> (F127, F127, F127, F127) {
         (
             F127::from(
                 (self.0.extract(0) as u128)
