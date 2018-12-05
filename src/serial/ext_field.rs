@@ -39,11 +39,13 @@ impl Mul<F127Ext> for F127Ext {
     type Output = F127Ext;
     #[inline]
     fn mul(self, other: F127Ext) -> F127Ext {
-        // XXX use Karatsuba
         let (a, b) = (self.0, self.1);
         let (c, d) = (other.0, other.1);
 
-        F127Ext(a * c - b * d, b * c + a * d)
+        let ac = a * c;
+        let bd = b * d;
+
+        F127Ext(ac - bd, (b-a)*(c-d) + ac + bd)
     }
 }
 
