@@ -12,7 +12,7 @@ const P: u128 = (1 << 127) - 1;
 /// The inner `u128` always lies in the range \\([0, 2^{127} - 1]\\).
 // XXX eq impl isn't correct (not always reduced)
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
-pub struct F127(u128);
+pub struct F127(pub(crate) u128);
 
 impl From<u128> for F127 {
     #[inline]
