@@ -150,7 +150,7 @@ impl Mul<F127x4> for F127x4 {
 
         let mask = u64x4::splat((1 << 43) - 1);
 
-        F127x4(((z0 & mask) + (c2 << 2), (z1 & mask) + c0, (z2 & mask) + c1))
+        F127x4((z0 & mask) + (c2 << 2), (z1 & mask) + c0, (z2 & mask) + c1)
     }
 }
 
