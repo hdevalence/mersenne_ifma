@@ -35,29 +35,28 @@ use crate::ifma::{madd52hi, madd52lo};
 
 pub struct F127x4(u64x4, u64x4, u64x4);
 
-// XXX should this use u128 or F127 ?
-impl From<(u128, u128, u128, u128)> for F127x4 {
-    fn from(x: (u128, u128, u128, u128)) -> F127x4 {
+impl From<(F127, F127, F127, F127)> for F127x4 {
+    fn from(x: (F127, F127, F127, F127)) -> F127x4 {
         let low_43_bits = (1 << 43) - 1;
 
         F127x4(
             u64x4::new(
-                (x.0 & low_43_bits) as u64,
-                (x.1 & low_43_bits) as u64,
-                (x.2 & low_43_bits) as u64,
-                (x.3 & low_43_bits) as u64,
+                ((x.0).0 & low_43_bits) as u64,
+                ((x.1).0 & low_43_bits) as u64,
+                ((x.2).0 & low_43_bits) as u64,
+                ((x.3).0 & low_43_bits) as u64,
             ),
             u64x4::new(
-                ((x.0 >> 43) & low_43_bits) as u64,
-                ((x.1 >> 43) & low_43_bits) as u64,
-                ((x.2 >> 43) & low_43_bits) as u64,
-                ((x.3 >> 43) & low_43_bits) as u64,
+                (((x.0).0 >> 43) & low_43_bits) as u64,
+                (((x.1).0 >> 43) & low_43_bits) as u64,
+                (((x.2).0 >> 43) & low_43_bits) as u64,
+                (((x.3).0 >> 43) & low_43_bits) as u64,
             ),
             u64x4::new(
-                ((x.0 >> 86) & low_43_bits) as u64,
-                ((x.1 >> 86) & low_43_bits) as u64,
-                ((x.2 >> 86) & low_43_bits) as u64,
-                ((x.3 >> 86) & low_43_bits) as u64,
+                (((x.0).0 >> 86) & low_43_bits) as u64,
+                (((x.1).0 >> 86) & low_43_bits) as u64,
+                (((x.2).0 >> 86) & low_43_bits) as u64,
+                (((x.3).0 >> 86) & low_43_bits) as u64,
             ),
         )
     }
@@ -66,18 +65,26 @@ impl From<(u128, u128, u128, u128)> for F127x4 {
 impl Into<(u128, u128, u128, u128)> for F127x4 {
     fn into(self) -> (u128, u128, u128, u128) {
         (
-            (self.0.extract(0) as u128)
-                + ((self.1.extract(0) as u128) << 43)
-                + ((self.2.extract(0) as u128) << 86),
-            (self.0.extract(1) as u128)
-                + ((self.1.extract(1) as u128) << 43)
-                + ((self.2.extract(1) as u128) << 86),
-            (self.0.extract(2) as u128)
-                + ((self.1.extract(2) as u128) << 43)
-                + ((self.2.extract(2) as u128) << 86),
-            (self.0.extract(3) as u128)
-                + ((self.1.extract(3) as u128) << 43)
-                + ((self.2.extract(3) as u128) << 86),
+            F127::from(
+                (self.0.extract(0) as u128)
+                    + ((self.1.extract(0) as u128) << 43)
+                    + ((self.2.extract(0) as u128) << 86),
+            ),
+            F127::from(
+                (self.0.extract(1) as u128)
+                    + ((self.1.extract(1) as u128) << 43)
+                    + ((self.2.extract(1) as u128) << 86),
+            ),
+            F127::from(
+                (self.0.extract(2) as u128)
+                    + ((self.1.extract(2) as u128) << 43)
+                    + ((self.2.extract(2) as u128) << 86),
+            ),
+            F127::from(
+                (self.0.extract(3) as u128)
+                    + ((self.1.extract(3) as u128) << 43)
+                    + ((self.2.extract(3) as u128) << 86),
+            ),
         )
     }
 }
