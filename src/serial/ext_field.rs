@@ -1,5 +1,6 @@
 use super::F127;
 
+/// An element of the quadratic extension field F127\[i\]
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct F127Ext(F127, F127);
 
