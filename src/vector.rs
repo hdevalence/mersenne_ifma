@@ -27,7 +27,7 @@
 //! evenly across the limbs and the limb boundaries are more closely
 //! aligned with the bitsize of the prime.
 
-use core::ops::Mul;
+use core::ops::{Mul, Add, Neg};
 
 use packed_simd::u64x4;
 
@@ -98,6 +98,26 @@ impl Into<(F127, F127, F127, F127)> for F127x4 {
                     + ((self.2.extract(3) as u128) << 86),
             ),
         )
+    }
+}
+
+impl Neg for F127x4 {
+    type Output = Self;
+    #[inline]
+    fn neg(self) -> Self {
+        F127x4(
+            u64x4::splat(((1 << 43) - 1) << 3) - self.0,
+            u64x4::splat(((1 << 43) - 1) << 3) - self.1,
+            u64x4::splat(((1 << 41) - 1) << 3) - self.2,
+        )
+    }
+}
+
+impl Add<F127x4> for F127x4 {
+    type Output = F127x4;
+    #[inline]
+    fn add(self, other: F127x4) -> F127x4 {
+        F127x4(self.0 + other.0, self.1 + other.1, self.2 + other.2)
     }
 }
 
@@ -204,6 +224,25 @@ mod tests {
         assert_eq!(zs.1, xs.1 * xs.1);
         assert_eq!(zs.2, xs.2 * xs.2);
         assert_eq!(zs.3, xs.3 * xs.3);
+    }
+
+    #[test]
+    fn add_negation_is_zero() {
+        let xs: (F127, F127, F127, F127) = (
+            101054725971136791246222244709531340474u128.into(),
+            38188712660835962328561942614081743514u128.into(),
+            43654918112560223727172090912658261884u128.into(),
+            61331686004747624160469066397670963925u128.into(),
+        );
+
+        let x_vec: F127x4 = xs.into();
+
+        let zs: (F127, F127, F127, F127) = (x_vec + (-x_vec)).into();
+
+        assert_eq!(zs.0, F127::zero());
+        assert_eq!(zs.1, F127::zero());
+        assert_eq!(zs.2, F127::zero());
+        assert_eq!(zs.3, F127::zero());
     }
 
 }

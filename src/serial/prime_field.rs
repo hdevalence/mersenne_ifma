@@ -14,6 +14,19 @@ const P: u128 = (1 << 127) - 1;
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub struct F127(pub(crate) u128);
 
+impl F127 {
+    /// Constructs the zero element.
+    pub fn zero() -> F127 {
+        F127(0)
+    }
+}
+
+impl Default for F127 {
+    fn default() -> F127 {
+        F127::zero()
+    }
+}
+
 impl From<u128> for F127 {
     #[inline]
     fn from(x: u128) -> F127 {
