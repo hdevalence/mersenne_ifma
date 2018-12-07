@@ -66,7 +66,16 @@ impl From<(F127, F127, F127, F127)> for F127x4 {
 }
 
 impl Into<(F127, F127, F127, F127)> for F127x4 {
-    fn into(self) -> (F127, F127, F127, F127) {
+    fn into(mut self) -> (F127, F127, F127, F127) {
+
+        // We store self as a 129-bit (or more) integer,
+        // so reduce it before conversion
+        // XXX check bounds
+        let mask = u64x4::splat((1 << 41) - 1);
+        let c = self.2 >> 41;
+        self.0 += c;
+        self.2 &= mask;
+
         (
             F127::from(
                 (self.0.extract(0) as u128)
