@@ -2,7 +2,7 @@ use super::F127;
 
 /// An element of the quadratic extension field F127\[i\]
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
-pub struct F127Ext(F127, F127);
+pub struct F127Ext(pub(crate) F127, pub(crate) F127);
 
 use core::ops::{Add, AddAssign, Mul, MulAssign, Neg, Sub, SubAssign};
 

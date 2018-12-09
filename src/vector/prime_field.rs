@@ -125,8 +125,6 @@ impl Mul<F127x4> for F127x4 {
     type Output = F127x4;
     #[inline]
     fn mul(self, other: F127x4) -> F127x4 {
-        use super::ifma::{madd52hi, madd52lo};
-
         let (x0, y0) = (self.0, other.0);
         let (x1, y1) = (self.1, other.1);
         let (x2, y2) = (self.2, other.2);
