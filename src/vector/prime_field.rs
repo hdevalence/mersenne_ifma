@@ -27,7 +27,7 @@
 //! evenly across the limbs and the limb boundaries are more closely
 //! aligned with the bitsize of the prime.
 
-use core::ops::{Mul, Add, Neg};
+use core::ops::{Add, Mul, Neg};
 
 use packed_simd::u64x4;
 
@@ -67,7 +67,6 @@ impl From<(F127, F127, F127, F127)> for F127x4 {
 
 impl Into<(F127, F127, F127, F127)> for F127x4 {
     fn into(mut self) -> (F127, F127, F127, F127) {
-
         // We store self as a 129-bit (or more) integer,
         // so reduce it before conversion
         // XXX check bounds
