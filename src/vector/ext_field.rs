@@ -55,6 +55,8 @@ impl Mul<ExtF127x4> for ExtF127x4 {
 
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
     fn mul_matches_serial() {
         let xs = (
