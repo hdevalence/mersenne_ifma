@@ -3,6 +3,7 @@
 
 //#![no_std]
 #![feature(simd_ffi, link_llvm_intrinsics)]
+#![feature(external_doc)]
 #![deny(missing_docs)]
 
 //#[cfg(not(target_feature = "avx512ifma"))]
