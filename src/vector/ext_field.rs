@@ -4,6 +4,7 @@ use super::F127x4;
 use crate::serial::{ExtF127, F127};
 
 /// A vector of four elements of the extension field.
+#[derive(Copy, Clone, Debug)]
 pub struct ExtF127x4(F127x4, F127x4);
 
 impl From<(ExtF127, ExtF127, ExtF127, ExtF127)> for ExtF127x4 {
